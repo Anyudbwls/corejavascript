@@ -31,15 +31,15 @@ let userName = prompt("who's there?", '');
 
 console.log(userName);
 
-if (userName.toUpperCase('admin') === userName.toUpperCase('ADMIN')) {
+if (userName.toLowerCase() === 'admin') {
   let pw = prompt('please pw?', '');
 
-  if (pw === 'themaster') {
+  if (pw?.toLowerCase() === 'themaster') {
     alert('Welcome');
   } else {
     alert('Canceled');
   }
-} else if (userName === '' || userName === null) {
+} else if (userName.replace(/\s*/g, '') === '' || userName === null) {
   console.log('취소되었습니다.');
 } else {
   console.log('인증되지 않은 사용자');
