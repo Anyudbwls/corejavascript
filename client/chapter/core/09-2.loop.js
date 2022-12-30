@@ -44,5 +44,7 @@ function prev(node) {
   } while (node.nodeType !== document.ELEMENT_NODE);
   return node;
 }
-console.log(prev(second)); // do ~ while 문 (순환)
+console.log(prev(second));
+
+// do ~ while 문 (순환)
 // - 위 do ~ while 문을 순방향으로 순환되도록 설정
