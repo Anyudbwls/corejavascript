@@ -29,7 +29,7 @@ function calcPrice(priceA, priceB, priceC = getRandomValue(), priceD = getRandom
 
   return priceA + priceB + priceC + priceD;
 }
-let result = calcPrice(); //함수호출
+let result = calcPrice(10, 20); //함수호출
 console.log(result);
 
 // 함수 선언
@@ -48,10 +48,29 @@ console.log(result);
 
 // 좋은 함수 작성 여건
 
+// 1. 하나의 기능만 수행해야한다 (관심사의 분리)
+// 2. 읽었을때 바로 기능을 알 수 있게끔,( 이름과 매개변수의 이름을 직관적이게 적어야 한다.)
+// 3. 재사용성이 좋아야 한다.
 /* 다음 함수를 작성해봅니다. -------------------------------------------------- */
 
 // rem(pxValue: number|string, base: number):string;
-let rem;
+
+function rem(pxValue, base = 16) {
+  // if (typeof pxValue === 'string') {
+  //   pxValue = parseInt(pxValue, 10);
+  // }
+  // if (typeof base === 'string') {
+  //   base = parseInt(pxValue, 10);
+  // }
+
+  typeof pxValue === 'string' && (pxValue = parseInt(pxValue, 10));
+  typeof base === 'string' && (base = parseInt(base, 10));
+
+  return `${pxValue / base}rem`;
+}
+console.assert(rem(20) === '1.25rem');
+console.assert(rem('30px') === '1.25rem');
+console.assert(rem('56px', 10) === '1.25rem');
 
 // css(node: string, prop: string, value: number|strung) : string;
 let css;
