@@ -48,13 +48,10 @@ const user = {
     //   total += item;
     // });
     // return total;
-  function foo() {
-    console.log('bar :' ,this);
-  }
-  const bar = () => {
-
-  }
-  
+    function foo() {
+      console.log('bar :', this);
+    }
+    const bar = () => {};
   },
 };
 
@@ -63,14 +60,38 @@ user.totalGrades();
 /* 다음 함수를 작성해봅니다. -------------------------------------------------- */
 
 // pow(numeric: number, powerCount: number): number;
-let pow = (numeric,powerCount)=>{
-  
+let pow = (numeric, powerCount) => {
+  let result = 1;
+  for (let i = 0; i < powerCount; i++) {
+    result *= numeric;
+  }
+  return result;
 };
-반복문 으로 2의 53승을 만든다 
-pow(2,53)
+
+let powExpression = (numeric, powerCount) =>
+  Array(powerCount)
+    .fill(null)
+    .reduce((acc) => acc * numeric, 1);
+// 매개변수가 하나일때는 줄인다
+
+let answerPow = powExpression(2, 53);
+
 // repeat(text: string, repeatCount: number): string;
-let repeat;
+let repeat = (text, repeatCount) => {
+  //validation
+  if (!repeatCount) {
+    throw new Error('숫자 좀 넣어라');
+  }
+  let result = '';
+  for (let i = 0; i < repeatCount; i++) {
+    result += text;
+  }
+  return result;
+};
 
-특정 문자를 반복시키는 함수 만들기 
-
-repeat
+let repeatExpression = (text, repeatCount) => {
+  Array(repeatCount)
+    .fill(null)
+    .reduce((acc) => acc + text, '');
+};
+console.log(repeatExpression('hello', 3));
