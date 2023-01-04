@@ -152,3 +152,21 @@ for (const [key, value] of Object.entries(salaries)) {
 }
 
 console.log(total);
+let color = ['#ff0000', '#2b00ff', '#00ff2f'];
+// const COLOR_RED = color[0];
+// const COLOR_BLUE = color[1];
+// const COLOR_GREEN = color[2];
+
+const [, , COLOR_GREEN] = color;
+console.log(COLOR_GREEN);
+
+//객체의 구조 분해 할당
+// let salaries = {
+//   John: 100,
+//   Ann: 160,
+//   Pete: 430,
+// };
+
+const { John, Ann, Pete } = salaries;
+
+console.log(Pete);
