@@ -10,5 +10,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'no-unused-vars': 'off',
+    'no-undef': 'off', //좋은방법은 아니다.
+  },
 };
