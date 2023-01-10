@@ -12,5 +12,6 @@ module.exports = {
   },
   rules: {
     'no-unused-vars': 'off',
+    'no-undef': 'off', //좋은방법은 아니다.
   },
 };
