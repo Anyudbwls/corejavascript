@@ -34,8 +34,15 @@ h1.append(div);
 // - insertAdjacentElement
 // - insertAdjacentText
 
-h1.insertAdjacentHTML('beforeend', '<div class="box"> 새룝게 추가된 엘리먼트입니다. </div>');
+let index = 1;
+
+let template = /*html */ `<div class='box0${index}'> 새롭게 추가된 엘리먼트입니다 </div>`;
+
 // - "beforebegin" – elem 바로 앞에 html을 삽입
 // - "afterbegin" – elem의 첫 번째 자식 요소 바로 앞에 html을 삽입
 // - "beforeend" – elem의 마지막 자식 요소 바로 다음에 html을 삽입
 // - "afterend" – elem 바로 다음에 html을 삽입
+
+//h1.insertAdjacentHTML('beforeend', template);
+
+insertLast('h1', template);

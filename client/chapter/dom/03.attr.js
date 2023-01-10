@@ -41,7 +41,7 @@ console.log(first.attributes);
 
 //for of 를 쓸수있냐 없냐?
 // 순환 할려면 symbol.iterator 기능이 있어야 순환 가능하다. 그래서 for of 를 돌릴수있다.
-//단순히 인덱스를 돌린다면 for
+// 단순히 인덱스를 돌린다면 for
 // 객체와 배열을 순환한다면 for of 문이 더 적합하다.
 
 // for (let i = 0; i < first.attributes.length; i++) {
