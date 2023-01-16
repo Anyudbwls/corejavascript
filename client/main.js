@@ -1,15 +1,15 @@
 import {
-  attr,
   diceAnimation,
   disableElement,
   enableElement,
   getNode,
+  clearContents,
   getNodes,
   insertLast,
   visibleElement,
   invisibleElement,
-  clearContents,
   memo,
+  attr,
 } from './lib/index.js';
 
 // [ 주사위 굴리기 ]
@@ -30,33 +30,38 @@ import {
 // 2. HTML 템플릿 만들기
 // 3. 템플릿 뿌리기
 
-//[초기화 시키기]
-//1.clearContent 로 정보지우기
-//2. total,count 초기화
-//3.스크롤 밑으로 보내기
-//4.
+// [ 초기화 시키기 ]
+// 1. clearContent 로 정보 지우기
+// 2. total, count 초기화
+// 3. 스크롤 밑으로 보내기
+// 4. 메모이제이션 패턴
+
 // 배열의 구조 분해 할당
 const [rollingDiceButton, recordButton, resetButton] = getNodes('.buttonGroup > button');
 
 const recordListWrapper = getNode('.recordListWrapper');
 
-memo('@tbody', () => {
-  getNode('.recordListWrapper tbody');
-});
-//특ㅈ덩 대상의 속성 값을 가져오거나,설정할 수 있는 함수 = attr
+memo('@tbody', () => getNode('.recordListWrapper tbody'));
+
+// 특정 대상의 속성값을 가져오거나 / 설정할 수 있는 함수
+
 /* -------------------------------------------------------------------------- */
 /* render                                                                     */
 /* -------------------------------------------------------------------------- */
 
 let count = 0;
 let total = 0;
+// redux
+// mobx
+
 function renderRecordListItem() {
-  let diceValue = +attr(memo('cube'), 'data-dice');
+  let diceValue = Number(attr(memo('cube'), 'data-dice'));
+
   let template = /* html */ `
     <tr>
       <td>${++count}</td>
       <td>${diceValue}</td>
-      <td>${(total = total + diceValue)}</td>
+      <td>${(total += diceValue)}</td>
     </tr>
   `;
 
@@ -98,8 +103,9 @@ const handleRecord = () => {
 const handleReset = () => {
   count = 0;
   total = 0;
+
   invisibleElement(recordListWrapper);
-  clearContents('.recordListWrapper tbody');
+  clearContents(memo('@tbody'));
 };
 
 rollingDiceButton.addEventListener('click', handleRollingDice);
