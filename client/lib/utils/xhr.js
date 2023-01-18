@@ -11,7 +11,7 @@
 
 // xhrData 함수 만들기 method, url 
 
-function xhrData({
+export function xhrData({
   url = '',
   method = 'GET',
   body = null,
