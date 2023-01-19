@@ -5,7 +5,7 @@ const defaultOptions = {
   cache: 'no-cache',
   credential: 'same-origin',
   redirect: 'follow',
-  referrerPolicy: 'no-reffere',
+  referrerPolicy: 'no-referrer',
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
   },
@@ -29,15 +29,15 @@ export const tiger = async (options = {}) => {
   return response;
 };
 
-tiger.get = (url, options) => {
-  tiger({
+tiger.get = async (url, options) => {
+  return tiger({
     url,
     ...options,
   });
 };
 
 tiger.post = (url, body, options) => {
-  tiger({
+  return tiger({
     method: 'POST',
     url,
     body: JSON.stringify(body),
@@ -46,7 +46,7 @@ tiger.post = (url, body, options) => {
 };
 
 tiger.put = (url, body, options) => {
-  tiger({
+  return tiger({
     method: 'PUT',
     url,
     body: JSON.stringify(body),
@@ -55,7 +55,7 @@ tiger.put = (url, body, options) => {
 };
 
 tiger.delete = (url, options) => {
-  tiger({
+  return tiger({
     method: 'DELETE',
     url,
     ...options,
