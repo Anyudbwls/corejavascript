@@ -30,7 +30,7 @@ async function rendingUserList() {
   renderSpinner(userCardContainer);
 
   try {
-    await delayP(3000);
+    await delayP(2000);
 
     getNode('.loadingSpinner').remove();
 
