@@ -30,11 +30,11 @@ async function rendingUserList() {
   renderSpinner(userCardContainer);
 
   try {
-    await delayP(4000);
+    await delayP(3000);
 
     getNode('.loadingSpinner').remove();
 
-    let response = await tiger.get('https://jsonplaceholder.typicode.com/users');
+    let response = await tiger.get('http://localhost:3000/users');
 
     let userData = response.data;
     // userData.forEach(data=> renderUserCard(userCardContainer,data))
@@ -64,6 +64,9 @@ function handler(e) {
   if (!deleteBtn || !article) return;
   let id = attr(article, 'data-index').slice(5);
 
-  tiger.delete(`https://jsonplacehloder.typicode.com/users/${id}`);
+  tiger.delete(`http://localhost:3000/users/${id}`).then(() => {
+    userCardContainer.innerHTML = '';
+    rendingUserList();
+  });
 }
 userCardContainer.addEventListener('click', handler);
