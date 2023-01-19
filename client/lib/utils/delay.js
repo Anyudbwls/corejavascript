@@ -12,48 +12,54 @@ function delay(callback, timeout = 1000) {
 // first.style.transform = 'rotate(360deg)';
 // first.style.top = '0px';
 
-// delay(() => {
-//   first.style.top = '-100px';
-//   delay(() => {
-//     delay(() => {
-//       first.style.top = '0px';
-//     });
-//     first.style.transform = 'rotate(360deg)';
-//   });
-// });
+/* 
+delay(()=>{
+  first.style.top = '-100px';
+  delay(()=>{
+    second.style.left = '100px';
+    delay(()=>{
+      first.style.top = '0px';
+      second.style.left = '0px';
+    })
+    first.style.transform = 'rotate(360deg)';
+  })
+})
+ */
 
-// delayP()
-//   .then(() => {
-//     first.style.top = '-100px';
-//     return delayP();
-//   })
-//   .then(() => {
-//     first.style.transform = 'rotate(360deg)';
-//     first.style.left = '100px';
-//     return delayP();
-//   })
-//   .then(() => {
-//     first.style.top = '0px';
-//     second.style.left = '0px';
-//   });
+/* 
+delayP()
+.then(()=>{
+  first.style.top = '-100px';
+  return delayP()
+})
+.then(()=>{
+  first.style.transform = 'rotate(360deg)';
+  second.style.left = '100px';
+  return delayP()
+})
+.then(()=>{
+  first.style.top = '0px';
+  second.style.left = '0px';
+})
+ */
 
 const defaultOptions = {
   shouldReject: false,
   timeout: 1000,
-  data: '성공했습니다',
-  errorMessage: '알수없는 오류가 발생했습니다.',
+  data: '성공',
+  errorMessage: '알 수 없는 오류가 발생했습니다.',
 };
 
 export function delayP(options = {}) {
-  let config = { ...defaultOptions }; //스프레드 연산자 참조한게 아니라 통으로 복사한거다
+  // defaultOptions
+
+  let config = { ...defaultOptions };
 
   if (isNumber(options)) {
     config.timeout = options;
   }
 
-  //객체 합성 mixin
-  //새로운 값을 던졌을때 대체가 되어야 하기 때문에
-  //기존의 값이랑 옵션이랑 전달한 값을 합성한다.
+  // 객체 합성  mixin
   if (isObject(options)) {
     config = { ...config, ...options };
   }
@@ -67,15 +73,40 @@ export function delayP(options = {}) {
   });
 }
 
-//성공값을 받을라면 꼭 .then을 써야 한다
-// delayP(3000).then((res) => {
-//   console.log(res);
-// });
+// delayP().then((res)=>{
+//   console.log(res); // 진짜 성공
+// })
 
 // delayP()
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+// .then(res=>console.log(res))
+// .catch(err=>console.log(err))
+
+// async: 일반함수를 프라미스를 반환하는 함수로 만든다.
+//
+
+async function delayA() {
+  return '완료';
+}
+
+let result = await delayA();
+
+// console.log(result);
+
+async function 라면끓이기() {
+  await delayP(1500);
+  first.style.top = '-100px';
+
+  await delayP(1500);
+  first.style.transform = 'rotate(360deg)';
+
+  await delayP(1500);
+  first.style.top = '0px';
+
+  await delayP(1500);
+  console.log('계란넣기');
+
+  await delayP(1500);
+  console.log('그릇에담기');
+}
+
+//라면끓이기()
